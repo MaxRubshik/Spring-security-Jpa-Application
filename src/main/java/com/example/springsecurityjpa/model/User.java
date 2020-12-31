@@ -2,6 +2,7 @@ package com.example.springsecurityjpa.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -12,6 +13,7 @@ import java.util.Collection;
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class User {
 
     @Id
@@ -26,7 +28,7 @@ public class User {
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
-            name = "user_roles",
+            name = "users_roles",
             joinColumns = @JoinColumn(
                     name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(
@@ -34,9 +36,6 @@ public class User {
             )
     )
     private Collection<Role> roles;
-
-    public User() {
-    }
 
     public User(String firstName, String lastName, String email, String password, Collection<Role> roles) {
         super();
